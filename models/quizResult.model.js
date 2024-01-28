@@ -1,34 +1,32 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const resultSchema = new mongoose.Schema({
-  
-  quizGrade: [{
-    quizId:{
-      type:String,
-      required:true,
+const resultSchema = new mongoose.Schema ({
+
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     },
-    grade:{
-      type:Number,
-      required: true,
 
-    }
-  
+    // quizId : {
+    //     type : mongoose.Schema.Types.ObjectId,
+    //     ref :'Quiz',
+    //     required : true
+    // },
 
-  }],
-
-  userId:{
-    type: String,
-  
-    required: true
-  },
- 
-  lessonName:{
-    type: String,
-    required: true
-  }
-
- 
+    quizGrades : [
+        {
+            quizId :{
+                type : mongoose.Schema.Types.ObjectId,
+                ref :'Quiz',
+                required : true
+            },
+            score :{
+                type : String,
+                required : true
+            }
+        }
+    ]
 })
 
-
- module.exports = mongoose.model('quizResult', resultSchema);
+module.exports = mongoose.model('quizResult', resultSchema);
